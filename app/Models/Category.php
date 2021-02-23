@@ -46,5 +46,7 @@ class Category extends BaseModel
         'type' => 'required'
     ];
 
-
+    public function entries(){
+        return $this->hasMany(Entry::class, 'category_id', 'id');
+    }
 }
