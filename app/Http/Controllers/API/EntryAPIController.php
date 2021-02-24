@@ -34,11 +34,11 @@ class EntryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $entries = $this->entryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $entries = $this->entryRepository
+            ->with('category')
+            ->with('user')
+            ->orderBy('date', 'desc')
+            ->paginate(10);
 
         return $this->sendResponse($entries->toArray(), 'Entries retrieved successfully');
     }
