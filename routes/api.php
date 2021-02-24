@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('categories', App\Http\Controllers\API\CategoryAPIController::class);
 Route::resource('entries', App\Http\Controllers\API\EntryAPIController::class);
+
+
+Route::resource('users', App\Http\Controllers\API\UserAPIController::class);

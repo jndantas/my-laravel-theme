@@ -2,7 +2,7 @@
 
     <li class="menu-header">Dashboard</li>
 
-    <li class="active">
+    <li>
         <router-link class="nav-link" :to="{ name : 'home'}" ><i class="fas fa-fire"></i> <span>Home</span></router-link>
     </li>
     <li>

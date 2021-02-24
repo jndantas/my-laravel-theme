@@ -7,9 +7,11 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
 
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 import VueRouter from 'vue-router'
-
-
 Vue.use(VueRouter)
 
 //Routes

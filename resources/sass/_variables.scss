@@ -17,3 +17,15 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+.router-link-active{
+    box-shadow: 0 4px 8px #acb5f6;
+    background-color: #6777ef;
+    color: #fff !important;
+}
+
+.router-link-active:hover{
+    box-shadow: 0 0 0 #acb5f6 !important;
+    background-color: #6777ef;
+    color: #6777ef !important;
+}
