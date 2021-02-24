@@ -190,4 +190,26 @@ abstract class BaseRepository
 
         return $model->delete();
     }
+
+    /**
+     * Load relations
+     *
+     * @param array|string $relations
+     *
+     * @return $this
+     */
+    public function with($relations): BaseRepository
+    {
+        $this->model = $this->model->with($relations);
+
+        return $this;
+    }
+
+    public function orderBy($column, $direction = 'asc'): BaseRepository
+    {
+        $this->model = $this->model->orderBy($column, $direction);
+
+        return $this;
+    }
+
 }
