@@ -51,7 +51,7 @@ class Entry extends BaseModel
         'status' => 'string',
         'category_id' => 'integer',
         'created_by' => 'integer',
-        'date' => 'datetime'
+        'date' => 'date:d/m/Y'
     ];
 
     /**
@@ -72,7 +72,7 @@ class Entry extends BaseModel
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function creator(){
+    public function user(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
