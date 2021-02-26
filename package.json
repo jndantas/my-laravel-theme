@@ -27,7 +27,9 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
         "bootstrap-vue": "^2.21.2",
+        "cleave.js": "^1.6.0",
         "stisla-theme": "^1.0.6",
+        "vform": "^1.0.1",
         "vue-router": "^3.5.1"
     }
 }

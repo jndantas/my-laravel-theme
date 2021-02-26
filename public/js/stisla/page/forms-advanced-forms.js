@@ -2,7 +2,7 @@
 
 var cleavePN = new Cleave('.phone-number', {
   phone: true,
-  phoneRegionCode: 'us'
+  phoneRegionCode: 'br'
 });
 var cleaveC = new Cleave('.currency', {
   numeral: true,
@@ -21,7 +21,7 @@ var cleaveI = new Cleave('.invoice-input', {
 });
 var cleaveD = new Cleave('.datemask', {
   date: true,
-  datePattern: ['Y', 'm', 'd']
+  datePattern: ['d', 'm', 'Y']
 });
 var cc_last_type;
 var cleaveCC = new Cleave('.creditcard', {
