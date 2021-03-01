@@ -26,6 +26,7 @@
         <div class="main-content">
             <section class="section">
                 <router-view></router-view>
+                <vue-progress-bar></vue-progress-bar>
             </section>
         </div>
 

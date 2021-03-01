@@ -7,12 +7,36 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
 
+import VueRouter from 'vue-router'
+import { Form, HasError, AlertError } from 'vform';
+import Swal from 'sweetalert2'
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
-import VueRouter from 'vue-router'
+
+//Import Vue Filter
+require('./filter');
+//Import progressbar
+require('./progressbar');
+
 Vue.use(VueRouter)
+
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+window.Swal = Swal;
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+
+window.Toast = Toast;
 
 //Routes
 import { routes } from './router/routes';
@@ -21,6 +45,8 @@ const router = new VueRouter({
     mode:'history',
     routes
 })
+
+window.Fire = new Vue();
 
 /**
  * The following block of code may be used to automatically register your

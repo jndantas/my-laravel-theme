@@ -28,8 +28,11 @@
         "@fortawesome/fontawesome-free": "^5.15.2",
         "bootstrap-vue": "^2.21.2",
         "cleave.js": "^1.6.0",
+        "moment": "^2.29.1",
         "stisla-theme": "^1.0.6",
+        "sweetalert2": "^10.15.5",
         "vform": "^1.0.1",
+        "vue-progressbar": "^0.7.5",
         "vue-router": "^3.5.1"
     }
 }

@@ -6,11 +6,15 @@
         <router-link class="nav-link" :to="{ name : 'home'}" ><i class="fas fa-fire"></i> <span>Home</span></router-link>
     </li>
     <li>
-        <router-link class="nav-link" :to="{ name : 'users'}"><i class="fas fa-users"></i> <span>Usuários</span></router-link>
-    </li>
-    <li>
         <router-link class="nav-link" :to="{ name : 'entries'}"><i class="fas fa-users"></i> <span>Lançamentos</span></router-link>
     </li>
+
+    <li class="menu-header">Configurações</li>
+
+    <li>
+        <router-link class="nav-link" :to="{ name : 'users'}"><i class="fas fa-users"></i> <span>Usuários</span></router-link>
+    </li>
+
 
     {{--        <li class="menu-header">Starter</li>--}}
     {{--        <li class="nav-item dropdown">--}}
