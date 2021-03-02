@@ -17,15 +17,15 @@ class CreateEntriesTable extends Migration
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('description', 1000);
-            $table->decimal('value');
+            $table->string('description', 1000)->nullable();
+            $table->double('value');
             $table->enum('type', ['receivable','payable']);
             $table->enum('status', ['processing','paid'])->default('processing');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('created_by');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('created_by')->references('id')->on('users');
-            $table->datetime('date');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });

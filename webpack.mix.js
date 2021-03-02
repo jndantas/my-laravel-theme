@@ -12,5 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('node_modules/cleave.js/dist/cleave.min.js', 'public/js/cleave/cleave.min.js')
+    .js('node_modules/cleave.js/dist/addons/cleave-phone.br.js', 'public/js/cleave/cleave-phone.br.js')
+    .sourceMaps()
     .vue()
     .sass('resources/sass/app.scss', 'public/css');

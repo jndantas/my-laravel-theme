@@ -21,6 +21,22 @@ require('./filter');
 //Import progressbar
 require('./progressbar');
 
+// Create directive cleave
+import Cleave from 'cleave.js';
+
+Vue.directive('cleave', {
+    inserted: (el, binding) => {
+        el.cleave = new Cleave(el, binding.value || {})
+    },
+    update: (el) => {
+        const event = new Event('input', {bubbles: true});
+        setTimeout(function () {
+            el.value = el.cleave.properties.result
+            el.dispatchEvent(event)
+        }, 100);
+    }
+})
+
 Vue.use(VueRouter)
 
 window.Form = Form;

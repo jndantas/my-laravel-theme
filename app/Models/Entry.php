@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,6 +38,10 @@ class Entry extends BaseModel
         'date'
     ];
 
+    protected $appends = [
+        'format_value'
+    ];
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -46,7 +51,7 @@ class Entry extends BaseModel
         'id' => 'integer',
         'name' => 'string',
         'description' => 'string',
-        'value' => 'decimal:2',
+        'value' => 'double:2',
         'type' => 'string',
         'status' => 'string',
         'category_id' => 'integer',
@@ -67,6 +72,20 @@ class Entry extends BaseModel
         'category_id' => 'required',
         'date' => 'required'
     ];
+
+    public function setDateAttribute($value){
+        $date = Carbon::createFromFormat('d/m/Y', $value);
+        $this->attributes['date'] = $date;
+    }
+
+    public function setValueAttribute($value){
+        $value = str_replace([',', '.'], '', $value);
+        $this->attributes['value'] = $value;
+    }
+
+    public function getFormatValueAttribute(){
+        return number_format($this->attributes['value'] / 100, '2', ',', '.');
+    }
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');

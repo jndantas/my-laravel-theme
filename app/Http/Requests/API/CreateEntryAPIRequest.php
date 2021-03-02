@@ -26,4 +26,13 @@ class CreateEntryAPIRequest extends APIRequest
     {
         return Entry::$rules;
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'referência',
+            'value' => 'valor',
+            'date' => 'data'
+        ];
+    }
 }

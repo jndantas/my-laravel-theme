@@ -43,7 +43,7 @@ var cleaveCC = new Cleave('.creditcard', {
       }
       $(".creditcard").removeClass(cc_last_type);
       $(".creditcard").addClass(type);
-      cc_last_type = type;                        
+      cc_last_type = type;
     }
   }
 });

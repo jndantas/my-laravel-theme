@@ -8,6 +8,7 @@ use App\Models\Entry;
 use App\Repositories\EntryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -54,6 +55,7 @@ class EntryAPIController extends AppBaseController
     public function store(CreateEntryAPIRequest $request)
     {
         $input = $request->all();
+        $input['created_by'] = Auth::user()->id;
 
         $entry = $this->entryRepository->create($input);
 

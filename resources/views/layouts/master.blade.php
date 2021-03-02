@@ -42,7 +42,6 @@
 <script src="{{ asset('js/stisla/stisla.js') }}"></script>
 <script src="{{ asset('js/stisla/scripts.js') }}"></script>
 <script src="{{ asset('js/stisla/custom.js') }}"></script>
-<script src="{{ asset('js/stisla/page/forms-advanced-forms.js') }}"></script>
 
 
 

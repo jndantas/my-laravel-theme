@@ -18,6 +18,7 @@
         "infyomlabs/laravel-generator": "8.0.x-dev",
         "laravel/framework": "^8.12",
         "laravel/horizon": "^5.7",
+        "laravel/sanctum": "^2.9",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
