@@ -7,7 +7,7 @@
             </a>
         </td>
         <td>{{ item.name }} </td>
-        <td>A definir
+        <td>{{ item.type| typeUserText }}
             <div class="table-links">
                 <a href="#">Ver</a>
                 <div class="bullet"></div>
@@ -58,15 +58,15 @@ export default {
             }).then((result) => {
                 //enviar requisição para o servidor
                 if (result.value) {
-                    axios.delete('api/users/' + id).then(()=>{
+                    axios.delete('api/users/' + id).then(response =>{
                         Swal.fire(
                             'Apagado',
-                            'Usuário foi apagado',
+                            response.data.message,
                             'success'
                         )
-                        Fire.$emit('AfterCreate');
-                    }).catch(()=> {
-                        Swal.fire("Falhou!", "Houve algum erro.", "warning");
+                        this.$emit('deleted')
+                    }).catch(e => {
+                        Swal.fire("Falhou!", e.message, "warning");
                     });
                 }
             })

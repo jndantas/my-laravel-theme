@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'type',
+        'created_by'
     ];
 
     /**
@@ -44,6 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function entries(){
         return $this->hasMany(Entry::class, 'created_by', 'id');
     }
@@ -54,5 +58,10 @@ class User extends Authenticatable
 
     public function wallets(){
         return $this->hasMany(Wallet::class, 'user_id', 'id');
+    }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class, 'created_by', 'id');
     }
 }

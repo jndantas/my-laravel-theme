@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateUserAPIRequest;
+use App\Http\Requests\API\UserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class UserController
@@ -45,13 +46,14 @@ class UserAPIController extends AppBaseController
      * Store a newly created User in storage.
      * POST /users
      *
-     * @param CreateUserAPIRequest $request
+     * @param UserAPIRequest $request
      *
      * @return Response
      */
-    public function store(CreateUserAPIRequest $request)
+    public function store(UserAPIRequest $request)
     {
         $input = $request->all();
+        $input['created_by'] = auth()->user()->id;
 
         $user = $this->userRepository->create($input);
 
@@ -83,11 +85,11 @@ class UserAPIController extends AppBaseController
      * PUT/PATCH /users/{id}
      *
      * @param int $id
-     * @param UpdateUserAPIRequest $request
+     * @param UserAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateUserAPIRequest $request)
+    public function update($id, UserAPIRequest $request)
     {
         $input = $request->all();
 

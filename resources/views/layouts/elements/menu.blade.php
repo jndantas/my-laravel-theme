@@ -6,10 +6,13 @@
         <router-link class="nav-link" :to="{ name : 'home'}" ><i class="fas fa-fire"></i> <span>Home</span></router-link>
     </li>
     <li>
-        <router-link class="nav-link" :to="{ name : 'entries'}"><i class="fas fa-users"></i> <span>Lançamentos</span></router-link>
+        <router-link class="nav-link" :to="{ name : 'entries'}"><i class="fas fa-file-invoice-dollar"></i> <span>Lançamentos</span></router-link>
     </li>
 
     <li class="menu-header">Configurações</li>
+    <li>
+        <router-link class="nav-link" :to="{ name : 'categories'}"><i class="fas fa-boxes"></i> <span>Categorias</span></router-link>
+    </li>
 
     <li>
         <router-link class="nav-link" :to="{ name : 'users'}"><i class="fas fa-users"></i> <span>Usuários</span></router-link>
