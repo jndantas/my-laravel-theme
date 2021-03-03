@@ -14,11 +14,11 @@
                     <tr>
                         <th>Avatar</th>
                         <th>Nome</th>
-                        <th>Tipo</th>
+                        <th>Perfil</th>
                         <th>Criado em</th>
                         <th>Status</th>
                     </tr>
-                    <ListItemComponent ref="listItem" v-for="user in users" :key="user.id" :item="user"></ListItemComponent>
+                    <ListItemComponent ref="listItem" v-for="user in users" :key="user.id" :item="user" @deleted="loadData"></ListItemComponent>
                 </table>
             </div>
         </div>
@@ -42,6 +42,9 @@ export default {
         let self = this;
         self.loadData();
         self.scroll();
+        Fire.$on('AfterCreateUpdate', () => {
+        self.loadData();
+        })
     },
     methods: {
         loadData(){

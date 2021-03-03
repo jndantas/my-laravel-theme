@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'suspended', 'blocked'])->default('active');
+            $table->enum('type', ['admin', 'editor', 'view'])->default('view');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
