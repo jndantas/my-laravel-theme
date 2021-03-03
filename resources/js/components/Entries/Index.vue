@@ -22,6 +22,7 @@
             </div>
         </div>
         <CreateComponent></CreateComponent>
+        <EditComponent></EditComponent>
     </div>
 </div>
 </template>
@@ -29,9 +30,10 @@
 <script>
 import ListComponent from "./ListComponent";
 import CreateComponent from "./CreateComponent";
+import EditComponent from "./EditComponent";
 export default {
     name:'Index',
-    components: {CreateComponent, ListComponent},
+    components: {EditComponent, CreateComponent, ListComponent},
     mounted() {
     },
     data(){

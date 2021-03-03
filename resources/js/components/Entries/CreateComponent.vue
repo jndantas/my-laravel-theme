@@ -16,6 +16,14 @@
             <label class="custom-control-label" for="type_payable">A Pagar</label>
         </div>
         <div class="form-group">
+            <label>Categoria</label>
+            <select class="form-control" v-model="form.category_id" :class="{ 'is-invalid': form.errors.has('category_id') }">
+                <option></option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+            </select>
+            <has-error :form="form" field="category_id"></has-error>
+        </div>
+        <div class="form-group">
             <label>Referência</label>
             <input type="text" class="form-control" v-model="form.name" name="name" :class="{ 'is-invalid': form.errors.has('name') }">
             <has-error :form="form" field="name"></has-error>
@@ -59,8 +67,18 @@ export default {
                 value: '',
                 date: '',
                 type: 'receivable',
-                category_id: 1
-            })
+                category_id: null
+            }),
+            categories: []
+        }
+    },
+    mounted() {
+        this.loadCategories();
+    },
+    watch:{
+        'form.type'(value){
+            this.loadCategories();
+            this.form.category_id = null;
         }
     },
     methods: {
@@ -72,6 +90,15 @@ export default {
                 .catch(errors => {
 
                 })
+        },
+        loadCategories(){
+            axios.get('/api/categories?type=' + this.form.type)
+                .then(response => {
+                    this.categories = response.data.data;
+                })
+                .catch(error => {
+
+                });
         }
     }
 }

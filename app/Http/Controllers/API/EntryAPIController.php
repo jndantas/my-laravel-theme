@@ -54,8 +54,10 @@ class EntryAPIController extends AppBaseController
      */
     public function store(CreateEntryAPIRequest $request)
     {
+        $user = Auth::user();
         $input = $request->all();
-        $input['created_by'] = Auth::user()->id;
+        $input['created_by'] = $user->id;
+        $input['wallet_id'] = $user->wallet->id;
 
         $entry = $this->entryRepository->create($input);
 

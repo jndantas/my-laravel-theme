@@ -25,7 +25,12 @@ class UpdateEntryAPIRequest extends APIRequest
     public function rules()
     {
         $rules = Entry::$rules;
-        
+
         return $rules;
+    }
+
+    public function attributes()
+    {
+        return Entry::$formRequestAttributes;
     }
 }

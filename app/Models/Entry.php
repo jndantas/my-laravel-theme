@@ -73,6 +73,13 @@ class Entry extends BaseModel
         'date' => 'required'
     ];
 
+    public static $formRequestAttributes = [
+        'name' => 'referência',
+        'value' => 'valor',
+        'date' => 'data',
+        'category_id' => 'categoria',
+    ];
+
     public function setDateAttribute($value){
         $date = Carbon::createFromFormat('d/m/Y', $value);
         $this->attributes['date'] = $date;
@@ -89,6 +96,10 @@ class Entry extends BaseModel
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function wallet(){
+        return $this->belongsTo(Wallet::class, 'wallet_id', 'id');
     }
 
     public function user(){

@@ -29,10 +29,6 @@ class CreateEntryAPIRequest extends APIRequest
 
     public function attributes()
     {
-        return [
-            'name' => 'referência',
-            'value' => 'valor',
-            'date' => 'data'
-        ];
+        return Entry::$formRequestAttributes;
     }
 }

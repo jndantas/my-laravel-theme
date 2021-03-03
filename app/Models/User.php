@@ -47,4 +47,12 @@ class User extends Authenticatable
     public function entries(){
         return $this->hasMany(Entry::class, 'created_by', 'id');
     }
+
+    public function wallet(){
+        return $this->hasOne(Wallet::class, 'user_id', 'id');
+    }
+
+    public function wallets(){
+        return $this->hasMany(Wallet::class, 'user_id', 'id');
+    }
 }
