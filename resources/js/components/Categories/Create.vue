@@ -82,8 +82,6 @@ export default {
                             icon: 'error',
                             title: e.message
                         })
-
-
                 }
             }
         },

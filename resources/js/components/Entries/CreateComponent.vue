@@ -1,8 +1,9 @@
 <template>
     <b-modal
         id="modal-1"
+        ref="modal"
         title="Novo lançamento"
-        @ok.prevent="save"
+        @ok.prevent="create"
         ok-title="Cadastrar"
         cancel-title="Cancelar"
     >
@@ -82,14 +83,26 @@ export default {
         }
     },
     methods: {
-        save(){
-            this.form.post('/api/entries')
+        create(){
+            let self = this;
+            self.form.post('/api/entries')
                 .then(response => {
-
+                    Fire.$emit('AfterCreateEntry');
+                    self.hideModal()
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.data.message
+                    })
                 })
-                .catch(errors => {
-
+                .catch(error => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: error.message
+                    })
                 })
+        },
+        hideModal(){
+            this.$refs['modal'].hide()
         },
         loadCategories(){
             axios.get('/api/categories?type=' + this.form.type)

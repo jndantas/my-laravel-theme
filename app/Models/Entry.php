@@ -34,6 +34,7 @@ class Entry extends BaseModel
         'type',
         'status',
         'category_id',
+        'wallet_id',
         'created_by',
         'date'
     ];
@@ -55,6 +56,7 @@ class Entry extends BaseModel
         'type' => 'string',
         'status' => 'string',
         'category_id' => 'integer',
+        'wallet_id' => 'integer',
         'created_by' => 'integer',
         'date' => 'date:d/m/Y'
     ];

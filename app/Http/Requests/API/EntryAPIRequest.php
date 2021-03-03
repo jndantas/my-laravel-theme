@@ -5,7 +5,7 @@ namespace App\Http\Requests\API;
 use App\Models\Entry;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateEntryAPIRequest extends APIRequest
+class EntryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.

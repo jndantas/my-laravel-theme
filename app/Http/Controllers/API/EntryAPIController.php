@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateEntryAPIRequest;
+use App\Http\Requests\API\EntryAPIRequest;
 use App\Http\Requests\API\UpdateEntryAPIRequest;
 use App\Models\Entry;
 use App\Repositories\EntryRepository;
@@ -48,11 +49,11 @@ class EntryAPIController extends AppBaseController
      * Store a newly created Entry in storage.
      * POST /entries
      *
-     * @param CreateEntryAPIRequest $request
+     * @param EntryAPIRequest $request
      *
      * @return Response
      */
-    public function store(CreateEntryAPIRequest $request)
+    public function store(EntryAPIRequest $request)
     {
         $user = Auth::user();
         $input = $request->all();
@@ -61,7 +62,7 @@ class EntryAPIController extends AppBaseController
 
         $entry = $this->entryRepository->create($input);
 
-        return $this->sendResponse($entry->toArray(), 'Entry saved successfully');
+        return $this->sendResponse($entry->toArray(), 'Lançamento cadastrado com sucesso!');
     }
 
     /**
@@ -89,11 +90,11 @@ class EntryAPIController extends AppBaseController
      * PUT/PATCH /entries/{id}
      *
      * @param int $id
-     * @param UpdateEntryAPIRequest $request
+     * @param EntryAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateEntryAPIRequest $request)
+    public function update($id, EntryAPIRequest $request)
     {
         $input = $request->all();
 
@@ -106,7 +107,7 @@ class EntryAPIController extends AppBaseController
 
         $entry = $this->entryRepository->update($input, $id);
 
-        return $this->sendResponse($entry->toArray(), 'Entry updated successfully');
+        return $this->sendResponse($entry->toArray(), 'Lançamento atualizado com sucesso!');
     }
 
     /**

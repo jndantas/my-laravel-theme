@@ -2,7 +2,7 @@
     <b-modal
         ref="modal"
         title="Novo lançamento"
-        @ok.prevent="save"
+        @ok.prevent="update"
         ok-title="Cadastrar"
         cancel-title="Cancelar"
     >
@@ -73,7 +73,7 @@ export default {
         }
     },
     created() {
-        EventBus.$on('edit-entry', this.load)
+        EventBus.$on('EditEntry', this.load)
     },
     mounted() {
         this.loadCategories();
@@ -85,6 +85,9 @@ export default {
         }
     },
     methods: {
+        hideModal(){
+            this.$refs['modal'].hide()
+        },
         load(id){
             axios.get('/api/entries/' + id)
                 .then(response => {
@@ -102,13 +105,22 @@ export default {
 
                 });
         },
-        save(){
-            this.form.put('/api/entries/' + this.form.id)
+        update(){
+            let self = this;
+            self.form.put('/api/entries/' + this.form.id)
                 .then(response => {
-
+                    Fire.$emit('AfterUpdateEntry');
+                    self.hideModal()
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.data.message
+                    })
                 })
-                .catch(errors => {
-
+                .catch(error => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: error.message
+                    })
                 })
         },
         loadCategories(){

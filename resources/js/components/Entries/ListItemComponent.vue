@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         editItem(id){
-            EventBus.$emit('edit-entry', id);
+            EventBus.$emit('EditEntry', id);
         }
     }
 }
