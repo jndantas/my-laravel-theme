@@ -26,6 +26,8 @@ class UserRegisteredListener
      */
     public function handle(Registered $event)
     {
+        $event->user->created_by = $event->user->id;
+        $event->user->save();
         $event->user->wallet()->create([
             'name' => 'Minha carteira'
         ]);

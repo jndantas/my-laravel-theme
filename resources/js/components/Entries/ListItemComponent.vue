@@ -6,9 +6,12 @@
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute;">
                     <div class="dropdown-title">Opções</div>
                     <a href="#" class="dropdown-item has-icon"><i class="fas fa-list"></i> Detalhes</a>
-                    <a href="#" class="dropdown-item has-icon" @click.prevent="editItem(item.id)"><i class="fas fa-pencil-alt"></i> Editar</a>
+                    <a href="#" class="dropdown-item has-icon" @click.prevent="edit(item.id)"><i class="fas fa-pencil-alt"></i> Editar</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item has-icon text-danger trigger--fire-modal-1" data-confirm="Wait, wait, wait...|This action can't be undone. Want to take risks?" data-confirm-text-yes="Yes, IDC"><i class="fas fa-trash-alt"></i> Excluir</a>
+                    <a href="#" @click.prevent="onDelete(item.id)" class="dropdown-item has-icon text-danger trigger--fire-modal-1">
+                        <i class="fas fa-trash-alt"></i>
+                        Excluir
+                    </a>
                 </div>
             </div>
             <div class="mr-3 rounded entry-icon" :class="'bg-' + item.type">
@@ -41,8 +44,38 @@ export default {
 
     },
     methods: {
-        editItem(id){
+        edit(id){
             EventBus.$emit('EditEntry', id);
+        },
+        onDelete(id){
+            let self = this;
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "Você não poderá reverter isso.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, apague!'
+            }).then((result) => {
+                //enviar requisição para o servidor
+                if (result.value) {
+                    axios.delete('/api/entries/' + id)
+                        .then(response => {
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.data.message
+                            });
+                            self.$emit('deleted');
+                        })
+                        .catch(error => {
+                            Toast.fire({
+                                icon: 'error',
+                                title: error.message
+                            });
+                        });
+                }
+            });
         }
     }
 }

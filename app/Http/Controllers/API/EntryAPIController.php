@@ -40,6 +40,9 @@ class EntryAPIController extends AppBaseController
             ->with('category')
             ->with('user')
             ->orderBy('date', 'desc')
+            ->allQuery()
+            ->whereMonth('date', $request->input('month'))
+            ->whereYear('date', $request->input('year'))
             ->paginate(10);
 
         return $this->sendResponse($entries->toArray(), 'Entries retrieved successfully');
@@ -79,7 +82,7 @@ class EntryAPIController extends AppBaseController
         $entry = $this->entryRepository->find($id);
 
         if (empty($entry)) {
-            return $this->sendError('Entry not found');
+            return $this->sendError('Lançamento não encontrado.');
         }
 
         return $this->sendResponse($entry->toArray(), 'Entry retrieved successfully');
@@ -102,7 +105,7 @@ class EntryAPIController extends AppBaseController
         $entry = $this->entryRepository->find($id);
 
         if (empty($entry)) {
-            return $this->sendError('Entry not found');
+            return $this->sendError('Lançamento não encontrado.');
         }
 
         $entry = $this->entryRepository->update($input, $id);
@@ -126,11 +129,11 @@ class EntryAPIController extends AppBaseController
         $entry = $this->entryRepository->find($id);
 
         if (empty($entry)) {
-            return $this->sendError('Entry not found');
+            return $this->sendError('Lançamento não encontrado.');
         }
 
         $entry->delete();
 
-        return $this->sendSuccess('Entry deleted successfully');
+        return $this->sendSuccess('Lançamento excluído com sucesso.');
     }
 }

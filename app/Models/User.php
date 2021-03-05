@@ -53,13 +53,13 @@ class User extends Authenticatable
     }
 
     public function wallet(){
-        return $this->hasOne(Wallet::class, 'user_id', 'id');
+        return $this->hasOne(Wallet::class, 'user_id', 'created_by');
     }
 
     public function wallets(){
         return $this->hasMany(Wallet::class, 'user_id', 'id');
     }
-    
+
     public function users()
     {
         return $this->hasMany(User::class, 'created_by', 'id');
