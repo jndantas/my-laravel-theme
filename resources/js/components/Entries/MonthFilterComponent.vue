@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="month">
         <a href="#" @click.prevent="previousMonth"><i class="fa fa-chevron-left"></i></a>
         <span class="mr-2 ml-2">
             {{textFilter}}
@@ -18,8 +18,8 @@ export default {
     mixins: [scrollable, paginable],
     data(){
         return {
-            month: 3,
-            year: 2021,
+            month: null,
+            year: null,
             months: [
                 'Jan',
                 'Fev',
@@ -36,14 +36,9 @@ export default {
             ]
         }
     },
-    created() {
-        let self = this;
-        self.loadData();
-        self.scroll();
-        Fire.$on('AfterCreateEntry', self.loadData);
-    },
-    destroyed() {
-        Fire.$off('AfterCreateEntry');
+    mounted() {
+        this.year = new Date().getFullYear();
+        this.month = new Date().getMonth() + 1;
     },
     watch: {
         month(value){

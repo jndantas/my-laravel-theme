@@ -11,11 +11,10 @@
         </div>
     </div>
     <div class="section-body">
-        <h2 class="section-title">Lançamentos</h2>
-        <p class="section-lead">
-            Você pode gerenciar todos lançamentos, editar, apagar e mais.
-        </p>
-
+<!--        <h2 class="section-title">Lançamentos</h2>-->
+<!--        <p class="section-lead">-->
+<!--            Você pode gerenciar todos lançamentos, editar, apagar e mais.-->
+<!--        </p>-->
         <div class="row mt-4">
             <div class="col-12">
                 <ListComponent></ListComponent>

@@ -1,10 +1,11 @@
 <template>
     <div class="card">
         <div class="card-header">
-<!--            <h4>Todos Lançamentos</h4>-->
             <MonthFilterComponent @changed="applyMonthFilter"></MonthFilterComponent>
+            <BalanceComponent ref="balance"></BalanceComponent>
         </div>
         <div class="card-body">
+            <MonthBalanceComponent ref="monthBalance"></MonthBalanceComponent>
             <div class="summary">
                 <div class="summary-item">
                     <h6 class="mt-3">Item List <span class="text-muted">(4 Items)</span></h6>
@@ -25,21 +26,27 @@ import ListItemComponent from "./ListItemComponent";
 import scrollable from "../../mixins/scrollable";
 import paginable from "../../mixins/paginable";
 import MonthFilterComponent from "./MonthFilterComponent";
+import MonthBalanceComponent from "./MonthBalanceComponent";
+import BalanceComponent from "./BalanceComponent";
 export default {
     name: "ListComponent",
-    components: {MonthFilterComponent, ListItemComponent},
+    components: {BalanceComponent, MonthBalanceComponent, MonthFilterComponent, ListItemComponent},
     mixins: [scrollable, paginable],
     data(){
         return {
             entries: [],
-            params: {}
+            params: {},
+            balance_value: '875,25',
+            balance: 'positive',
         }
     },
     created() {
+        Fire.$on('AfterCreateEntry', self.loadData);
+    },
+    mounted() {
         let self = this;
         self.loadData();
         self.scroll();
-        Fire.$on('AfterCreateEntry', self.loadData);
     },
     destroyed() {
         Fire.$off('AfterCreateEntry');
@@ -55,7 +62,7 @@ export default {
                 })
                 .catch(error => {
 
-                })
+                });
         },
         loadMore(){
             axios.get(this.next_page_url, {
@@ -73,6 +80,12 @@ export default {
         applyMonthFilter(data){
             this.params = data;
             this.loadData();
+            this.$refs.monthBalance
+                .setParams(data)
+                .loadData();
+            this.$refs.balance
+                .setParams(data)
+                .loadData();
         }
     }
 }
@@ -80,4 +93,11 @@ export default {
 
 <style scoped>
 
+.negative {
+    color: #b73838 !important;
+}
+
+.positive {
+    color: #318a31 !important;
+}
 </style>

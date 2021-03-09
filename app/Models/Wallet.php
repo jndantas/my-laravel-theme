@@ -65,4 +65,12 @@ class Wallet extends BaseModel
         return $this->hasMany(Entry::class, 'wallet_id', 'id');
     }
 
+    public function payables(){
+        return $this->entries()->where('type', 'payable');
+    }
+
+    public function receivables(){
+        return $this->entries()->where('type', 'receivable');
+    }
+
 }
