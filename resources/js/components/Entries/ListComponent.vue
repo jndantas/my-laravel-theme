@@ -13,7 +13,7 @@
                         v-for="entry in entries"
                         :key="entry.id"
                         :item="entry"
-                        @deleted="loadData">
+                        @deleted="itemDeleted">
                     </ListItemComponent>
                 </div>
             </div>
@@ -25,13 +25,14 @@
 import ListItemComponent from "./ListItemComponent";
 import scrollable from "../../mixins/scrollable";
 import paginable from "../../mixins/paginable";
+import EntryObserver from "../../mixins/Entries/EntryObserver";
 import MonthFilterComponent from "./MonthFilterComponent";
 import MonthBalanceComponent from "./MonthBalanceComponent";
 import BalanceComponent from "./BalanceComponent";
 export default {
     name: "ListComponent",
     components: {BalanceComponent, MonthBalanceComponent, MonthFilterComponent, ListItemComponent},
-    mixins: [scrollable, paginable],
+    mixins: [scrollable, paginable, EntryObserver],
     data(){
         return {
             entries: [],
@@ -41,7 +42,7 @@ export default {
         }
     },
     created() {
-        Fire.$on('AfterCreateEntry', self.loadData);
+
     },
     mounted() {
         let self = this;
@@ -49,7 +50,7 @@ export default {
         self.scroll();
     },
     destroyed() {
-        Fire.$off('AfterCreateEntry');
+
     },
     methods: {
         loadData(){
@@ -86,6 +87,9 @@ export default {
             this.$refs.balance
                 .setParams(data)
                 .loadData();
+        },
+        itemDeleted(){
+            this.applyMonthFilter(this.params);
         }
     }
 }

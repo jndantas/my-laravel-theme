@@ -9,13 +9,10 @@
 </template>
 
 <script>
-import ListItemComponent from "./ListItemComponent";
-import scrollable from "../../mixins/scrollable";
-import paginable from "../../mixins/paginable";
+import EntryObserver from "../../mixins/Entries/EntryObserver";
 export default {
     name: "MonthFilterComponent",
-    components: {ListItemComponent},
-    mixins: [scrollable, paginable],
+    mixins: [EntryObserver],
     data(){
         return {
             month: null,

@@ -19,8 +19,10 @@
 </template>
 
 <script>
+import EntryObserver from "../../mixins/Entries/EntryObserver";
 export default {
     name: "MonthBalanceComponent",
+    mixins: [EntryObserver],
     data(){
         return {
             balance: null,

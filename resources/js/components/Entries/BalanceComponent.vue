@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-auto">
+    <div v-if="balance" class="ml-auto">
         <div class="text-right">
             <div>Saldo</div>
             <div class="balance" :class="balance.status">${{ balance.format_value }}</div>
@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import EntryObserver from "../../mixins/Entries/EntryObserver";
 export default {
     name: "BalanceComponent",
+    mixins: [EntryObserver],
     data(){
         return {
             balance: null,
